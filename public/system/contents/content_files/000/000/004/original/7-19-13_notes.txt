@@ -1,0 +1,59 @@
+go to gym now until 2:00
+
+come home around 2:15
+
+shower, eat --> 2:45
+
+http://learn.adafruit.com/ttl-serial-camera/wiring-the-camera --> Tutorial for arduino camera
+
+
+
+Use USB power for arduino, external power through arduino jack for the motor shield
+
+
+need to power two motors for wheels, two motors for arm
+
+
+
+Vin - input voltage from an external power source, can be battery leads
+- alternately, if a power jack is pugged in to the arduino, can be accessed through this pin
+
+5V - outputs regulated 5V potential from board regulator. supplying voltage through this pin bypasses the regulator and may damage board
+
+
+analog output pin to servo to ground to set servo position
+
+analog output pin to jumper cable to motor to ground for each robot drive motor
+
+arduino only has 32k of memory
+
+
+1) without motor shield it's hard to turn backwards
+2) arduino has a 32k memory limit so it's hard to store pictures
+3) either we need an SD card on board
+
+red  - +5v
+black - gnd
+white - RX pin (data into module)
+green - TX pin (data from module)
+
+
+final setup:
+
+white --> resistor --> gnd
+white --> second resistor --> digital pin (probably PWM)
+green --> digital pin (probably PWM)
+black --> gnd
+red --> 5v
+
+
+1) Navigate to project directory
+2) Modify readme.txt in some way - maybe add a smiley face like kevin did
+3) Save readme.txt
+4) Go back to the GUI, click local repositories, and find Michael0x2a/Niftybot
+5) Click the small blue arrow on the right side of the repository (to the right of the pin) to open the repo
+6) There should be a space on the right telling you that you have uncommitted changes - the green lines are ones you've added since the last commit and the red lines are ones you've removed
+7) Type in a commit message and press commit. This saves a record of the changes you've made to your local master branch
+8) Press sync to push your commit to the repository stored on github, thereby allowing everyone else to access it.
+
+

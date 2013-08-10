@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @content.title %>
+</p>
+
+<%unless @content.group == nil%>
+<p>
+  <b>Group:</b>
+  <%= @content.group.name %>
+</p>
+<%end%>
+
+<p>
+  <b>User:</b>
+  <%= @content.user.name%>
+</p>
+
+<%if @content.content_file_file_size != nil%>
+<p>
+  Content:</br>
+	<%if /image/.match(@content.content_file_content_type) %>
+		<%= image_tag @content.content_file.url,  :class => "content_image"%>
+	<%elsif /text/.match(@content.content_file_content_type)%>
+		<%= @content.content_file %>
+	<%end%>
+	
+
+</p>
+<%end%>
+
+
+<%= link_to 'Edit', edit_content_path(@content) %> |
+<%= link_to 'Back', contents_path %>

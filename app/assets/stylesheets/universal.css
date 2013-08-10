@@ -1,0 +1,15 @@
+.centered{
+	text-align:center;
+}
+
+a, a:hover{
+	text-decoration:none;
+}
+
+a:visited{
+	text-decoration: none;
+}
+
+#new_session{
+	margin-left: 600px;
+}

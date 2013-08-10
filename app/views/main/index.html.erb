@@ -1,0 +1,93 @@
+<% unless logged_in? %>
+
+<h3 class = "centered">Welcome to MemoryAlarm!</h3>
+<h4 class = "centered">Wake up to your favorite quotes, pictures, and music<h4>
+
+
+
+
+<h5>Register</h5>
+<%= form_for(@user, :remote => true) do |f| %>
+	<%= f.label :name%>
+	<%= f.text_field :name%> <br/>
+	
+	<%= f.label :email%>
+	<%= f.text_field :email%> <br/>
+	
+	<%= f.label :password%> <br/>
+	<%= f.password_field :password %> <br/>
+	
+	<%= f.submit "Register"%>
+
+<%end%>
+
+<br/> 
+
+<%= link_to 'Login', login_form_path, 
+:method => :get, remote: true, id: "login_link", class: "btn btn-success btn-large"%>
+
+<script>
+function startTime()
+{
+var today=new Date();
+var h=today.getHours();
+var m=today.getMinutes();
+var s=today.getSeconds();
+// add a zero in front of numbers<10
+m=checkTime(m);
+s=checkTime(s);
+document.getElementById('txt').innerHTML=h+":"+m+":"+s;
+t=setTimeout(function(){startTime()},500);
+}
+
+function checkTime(i)
+{
+if (i<10)
+  {
+  i="0" + i;
+  }
+return i;
+}
+
+
+
+</script>
+
+
+
+
+
+<%else%>
+
+<h3 class = "centered">Hello, <%=current_user.name%>!</h3>
+
+<%= form_for(@content, :remote => true, :id => "content_form", :class => "centered") do |f| %>
+	
+	<%= f.label "Add Content"%>
+	<div class="fileupload fileupload-new" data-provides="fileupload" id = "file_upload">
+  		<div class="input-append">
+    		<div class="uneditable-input span3" style="width:400px">
+    			<i class="icon-file fileupload-exists"></i> 
+    			<span class="fileupload-preview"></span>
+    		</div>
+    		<span class="btn btn-file"><span class="fileupload-new">Select file</span>
+    		<span class="fileupload-exists">Change</span><%= f.file_field :content_file%>
+    		</span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+  		</div>
+  			
+	<%= f.label :title%>
+	<%= f.text_field :title%> <br/>
+	<%= f.submit "Save", :class => "btn"%> <br/> <br/> <br/>
+	
+<%end%>
+
+
+<div id = "alarm">
+	<h1 id = "alarm_time">8:00 AM</h1>	
+</div>
+<%= link_to "Set alarm", "#", :id => "set_alarm_link", :class => "btn btn-primary btn-large"%>
+
+<%= link_to "Show Content", random_content_path, :id => "content", :class => "btn"%>
+
+
+<%end%>

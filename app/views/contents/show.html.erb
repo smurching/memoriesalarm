@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <p>
   <b>Title:</b>
@@ -21,7 +21,7 @@
 <p>
   Content:</br>
 	<%if /image/.match(@content.content_file_content_type) %>
-		<%= image_tag @content.content_file.url,  :class => "content_image"%>
+		<%= image_tag @content.content_file_url,  :class => "content_image", :id => "content_image"%>
 	<%elsif /text/.match(@content.content_file_content_type)%>
 		<%= @content.content_file %>
 	<%end%>
@@ -30,6 +30,14 @@
 </p>
 <%end%>
 
+<%if false%>
+<script>
+	var source = $('#content_image').attr("src");
+	var insert_position = source.search("s3")+2;
+	var src = "http://s3-us-west-2"+source.slice(insert_position);
+	$('#content_image').attr("src", src);
+</script>
+<%end%>
 
-<%= link_to 'Edit', edit_content_path(@content) %> |
-<%= link_to 'Back', contents_path %>
+<%= link_to 'Delete', content_path(@content.id), :method => :delete, :data => {:confirm => "Are you sure?"} %> 
+

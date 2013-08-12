@@ -1,0 +1,4 @@
+<p>You were invited to join <%=@group.name%> by <%= @sender.name %> </p> <br/>
+
+<%= link_to "Join", join_path(@token.value), :class => "btn btn-inverse", :method => :post %> <br/> <br/>
+<%= link_to "Decline", root_path, :class => "btn"%>

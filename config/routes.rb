@@ -12,10 +12,26 @@ Birthdayalarm::Application.routes.draw do
   match '/login' => "sessions#login", as: "login"
   match '/logout' => "sessions#logout", as: "logout"
   match '/login_form' => "sessions#login_form", as: "login_form"
+  
+  # Setting the alarm
   match '/alarm' => "main#set_alarm", as: "set_alarm"
+  
+  # Showing random content when the alarm goes off
   match '/random' => "contents#random_content", as: "random_content"
+  
+  # Showing a piece of content
   match '/contents/:id' => "contents#show", as: "show_content", :via => :get
 
+  # Creating invites
+  match '/groups/:id/invite' => "invites#create_invite", as: "create_invite", :via => :get
+  
+  # Showing and accepting invitations
+  match '/invites/:value' => "invites#show_invite", as: "show_invite", :via => :get
+  match '/invites/:value' => "invites#join", as: "join", :via => :post
+   
+  #List members of a group
+  match '/group/:id/list' => "groups#list_members", as: "list_members"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

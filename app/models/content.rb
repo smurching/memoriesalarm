@@ -5,5 +5,10 @@ class Content < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
   
+  validates :title, :presence => :true
   
+  def content_file_url
+    original = content_file.url
+    return original.split("s3").insert(1, "s3-us-west-2").join
+  end
 end

@@ -1,12 +1,15 @@
 class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
+  before_filter :login_filter, :only => [:index, :invite, :join]
   
   def index
-    @groups = Group.all
-    
-    @content = Content.new
-    @user = User.new
+    @groups = []
+    Group.all.each do |group|
+      if group.users.include?(current_user)
+        @groups << group
+      end
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,51 +17,14 @@ class GroupsController < ApplicationController
     end
   end
   
-  def invite
-    group = Group.find(params[:id])
-    recipient = User.find(params[:user_id])
-    
-    if logged_in? && recipient.id != current_user.id
-      @token = Token.new
-      @token.value = Token.generate_value    
-      if @token.save
-        respond_to do |format|
-          format.html {"Invited "+recipient.name+" to join "+group.name}
-          format.js
-        end
-      else
-        respond_to do |format|
-          format.html {"An error prevented your invitation from being sent"}
-          format.js
-        end                
-      end  
-    end            
-  end
-  
-  def join
-    token = Token.find_by_value(params[:value])
-    return unless token
-    
-    if token.user_id == current_user.id
-      group = Group.find(token.group_id)
-      group.users << current_user
-      current_user.groups << group
-    end
-    
-    group.save
-    current_user.save
-    
-    respond_to do |format|
-      format.html {redirect_to root_path, notice: "You successfully joined "+group.name+"!"}
-      format.js
-    end
-    
-  end
+
 
   # GET /groups/1
   # GET /groups/1.json
   def show
     @group = Group.find(params[:id])
+    @members = @group.users
+    @contents = @group.contents
 
     respond_to do |format|
       format.html # show.html.erb

@@ -42,13 +42,15 @@ class UsersController < ApplicationController
   def create
     @user = User.new({:email => params[:user][:email], :name => params[:user][:name]})
     @user.password_hash = User.password_create(params[:user][:password_hash])
-
+    
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+      if params[:user][:password_hash].length >= 6 && @user.save
+        format.html { redirect_to root_path }
+        format.js
         format.json { render json: @user, status: :created, location: @user }
       else
-        format.html { render action: "new" }
+        format.html {redirect_to new_user_path, notice: "Make sure your password is at least 6 characters long" }
+        format.js {redirect_to new_user_path}
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

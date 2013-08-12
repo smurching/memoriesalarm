@@ -1,0 +1,4 @@
+<%unless logged_in? %>
+	$('#wrapper').html('<%= j render "users/form"%>');
+
+<%end%>

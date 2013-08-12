@@ -1,0 +1,9 @@
+<h3 class = "centered">Your Groups</h3>
+
+<%= div_for(@groups) do |group| %>
+
+	- <%= link_to group.name, group_path(group.id) %>
+	
+	<br/><br/>
+
+<%end%>

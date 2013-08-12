@@ -1,29 +1,37 @@
-<%= form_for(@content, :class => "centered") do |f| %>
-  <% if @content.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@content.errors.count, "error") %> prohibited this content from being saved:</h2>
+<%= form_for(@content, :remote => true, :id => "new_content", :html => {:class => "centered"}) do |f| %>
+	
+	<h4>Add memories (files) to Alarm</h4> <br/>
+	
+	<%= f.text_field :title %> <br/>
+	
+	<div class="fileupload fileupload-new" data-provides="fileupload" id = "file_upload">
+  		<div class="input-append">
+    		<div class="uneditable-input span3">
+    			<i class="icon-file fileupload-exists"></i> 
+    			<span class="fileupload-preview"></span>
+    		</div>
+    		<span class="btn btn-file"><span class="fileupload-new">Select file</span>
+    		<span class="fileupload-exists">Change</span><%= f.file_field :content_file%>
+    		</span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+  		</div>
+  		
+  	<%if false%>
+	<div class="dropdown">
+  	<a id = "dropdown_link" data-toggle="dropdown" href="#">Dropdown trigger</a>
+  		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+    		...
+  		</ul>
+	</div>  		
+  	<%end%>	
+  	<br/>
+  			
+	<%= f.submit "Save", :class => "btn btn-success btn-large "%> <br/> <br/> <br/>
+	
+<%end%>
 
-      <ul>
-      <% @content.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :group_id %><br />
-    <%= f.number_field :group_id %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+  
+<script>
+  $.watermark.options.className = 'watermark';  
+  $.watermark.options.useNative = false;
+  $('#content_title').watermark("Title");
+</script>  

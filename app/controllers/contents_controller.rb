@@ -36,7 +36,7 @@ class ContentsController < ApplicationController
     @contents = current_user.contents
     @content = @contents[rand(@contents.length)]
     respond_to do |format|
-      format.html {redirect_to show_content_path(@content.id)}
+      format.html
       format.js
     end
   end
@@ -58,7 +58,7 @@ class ContentsController < ApplicationController
         format.html { redirect_to @content, notice: 'Content was successfully created.' }
         format.json { render json: @content, status: :created, location: @content }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to root_path, notice: "Content could not be saved" }
         format.json { render json: @content.errors, status: :unprocessable_entity }
       end
     end
@@ -87,7 +87,7 @@ class ContentsController < ApplicationController
     @content.destroy
 
     respond_to do |format|
-      format.html { redirect_to contents_url }
+      format.html { redirect_to root_path, :notice => "Successfully deleted content" }
       format.json { head :no_content }
     end
   end

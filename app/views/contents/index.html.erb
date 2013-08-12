@@ -1,27 +1,12 @@
-<h1>Listing contents</h1>
+<h3>Content you've uploaded: </h3>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Group</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
 <% @contents.each do |content| %>
-  <tr>
-    <td><%= content.name %></td>
-    <td><%= content.group_id %></td>
-    <td><%= content.user_id %></td>
-    <td><%= link_to 'Show', content %></td>
-    <td><%= link_to 'Edit', edit_content_path(content) %></td>
-    <td><%= link_to 'Destroy', content, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+
+	<%= link_to content.title, content %> | <%= link_to 'Delete', content, method: :delete, data: { confirm: 'Are you sure?' } %> <br/>
+  
 <% end %>
-</table>
 
-<br />
 
-<%= link_to 'New Content', new_content_path %>
+
+

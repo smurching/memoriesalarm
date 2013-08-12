@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   attr_accessible :name, :password_hash_confirmation, :group_id, :password_hash, :email
   has_and_belongs_to_many :groups, :uniq => true   
   has_many :contents
+  validates :email, :format => {:with => /\A[a-zA-Z0-9]+@[a-zA-Z]+[.][a-zA-Z.]+\z/, :message => 'is not valid. Please input a valid email address'}  
+  validates :name, :presence => true
+
    
    
   #BCRYPT STUFF STARTS HERE

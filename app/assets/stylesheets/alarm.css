@@ -1,0 +1,54 @@
+.time{
+	width: 60px;
+	height: 50px;
+	font-size: 28px;
+	text-align: center;
+}
+
+#min{
+	width: 60px;
+}
+
+.colon{
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+}
+
+#time_button{
+	font-size: 28px;
+	height: 50px;
+	margin-top: -13px;
+	margin-left: -4px;
+	border-radius: 0px;
+	
+}
+
+#snooze_button, #dismiss_button{
+	font-size: 14px;
+	height: 25px;
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+.big_responses{
+	font-size: 28px;
+	height: 50px;
+}
+
+#content_image{
+	height: 50%;
+	width: 50%;
+	max-width: 400px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#alarm_responses{
+	background-color: rgba(51, 51, 51, 0.9);
+	padding-top: 2%;
+	padding-bottom: 2%;
+	text-align: center;
+}
+

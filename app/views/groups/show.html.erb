@@ -1,5 +1,22 @@
-<p id="notice"><%= notice %></p>
+<h3 id = "group_name" class = "centered"><%=@group.name%></h3> <br/>
+
+<h4 id = "group_members_heading" class = "centered">Members</h4>
+
+<% @members.each do |user|%>
+	<p>- <%= user.name %></p> <br/>	
+<%end%>
+
+<h4 id = "group_content_heading" class = "centered">Content</h4>
 
 
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+<%if @contents != []%>
+	<% @contents.each do |content|%>
+		<p>- <%= link_to content.title, content %></p> <br/>	
+	<%end%>
+	
+<%else%>
+	<p> No content has been posted yet. <%= link_to "You can change that!", root_path%> </p>
+<%end%>
+
+<br/>
+<%= link_to "Invite friends", create_invite_path(@group.id), :id => "invite_link", :remote => true%>

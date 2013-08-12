@@ -1,13 +1,30 @@
-<%= form_for(@user, :remote => true) do |f| %>
-	<%= f.label :name%>
+
+
+
+<%= form_for(@user, :remote => false, :html => {:class => "new_user centered"}) do |f| %>
+
+	<div id = "blurb">
+		<h3 class = "centered" id = "welcome">Welcome to MemoryAlarm!</h3>
+		<h4 class = "centered" id = "purpose">Wake up to your favorite quotes, pictures, and music<h4>
+	</div>
+
 	<%= f.text_field :name%> <br/>
 	
-	<%= f.label :email%>
 	<%= f.text_field :email%> <br/>
 	
-	<%= f.label :password%> <br/>
 	<%= f.password_field :password %> <br/>
 	
-	<%= f.submit "Register"%>
+	<%= f.submit "Register", :id => "register_btn", :class => "btn btn-primary btn-large btn-form"%> <br/> <br/>
+	
+	<script>
+  		$.watermark.options.className = 'watermark';  
+  		$.watermark.options.useNative = false;	
+  		$('#user_name').watermark("Name");
+  		$('#user_email').watermark("Email");
+  		$('#user_password').watermark("Password (6 char minimum)");	
+	</script>	
+
+	<%= link_to 'Login', login_form_path, 
+	:method => :get, remote: true, id: "login_link", class: "btn centered"%>
 
 <%end%>

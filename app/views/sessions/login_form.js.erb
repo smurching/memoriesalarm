@@ -1,1 +1,29 @@
+// Render session form
 $('#wrapper').html("<%=j render 'form'%>");
+
+// Position form halfway down window whenever window is resized
+
+<%if false%>
+
+$(window).resize(function(){
+	var o = $('#new_session').offset();
+	var window_height = $(window).height();
+	var navbar_height = $('#navbar_container').outerHeight();
+	var form_height = $('#new_session').outerHeight();
+
+	if(form_height+navbar_height < window_height && window_height-form_height < 400){
+		$('#new_session').offset({"left" : o.left, "top" : (window_height-form_height)/2 });		
+	}
+	
+	else{
+		$('#new_session').offset({"left" : o.left, "top" : window_height/4-form_height/2})
+	}
+
+	
+});
+
+$(window).resize();
+
+<%end%>
+
+$('#new_session').prepend("<br/><h4 class = 'centered'> Good to see you again! </h4>");

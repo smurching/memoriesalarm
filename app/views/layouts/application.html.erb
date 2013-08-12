@@ -20,7 +20,7 @@
   </head>
   <body>
   
-    <div class="navbar navbar-fluid-top">   	
+    <div class="navbar navbar-fluid-top" id = "navbar_container">   	
       <div class="navbar-inner">
         <div class="container-fluid">   	
           <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
@@ -29,10 +29,14 @@
             <span class="icon-bar"></span>
           </a>
           <h3 class = "centered" id = "navbar_title"><%= link_to "Alarm", "/"%></h3>
-          <%if logged_in?%>
-          <%= link_to "Logout", logout_path%>
-          <%= link_to "Create Group", new_group_path %>
-          <%end%>
+          <div id = navlinks>
+          	<%if logged_in?%>
+          		<%= link_to "Logout", logout_path%> | 
+          		<%= link_to "Create Group", new_group_path %> | 
+          		<%= link_to "My Groups", groups_path %> | 
+          		<%= link_to "My content", contents_path%>
+          	<%end%>
+          </div>
           <div class="container-fluid nav-collapse">
 
           </div><!--/.nav-collapse -->

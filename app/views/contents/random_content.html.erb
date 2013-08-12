@@ -1,0 +1,25 @@
+
+
+<div id = "image_start">
+
+<%= image_tag @content.content_file_url,  :class => "content_image", :id => "content_image"%>
+
+
+<br/>
+<div id = "alarm_responses">
+<%= link_to "Zzz... (5 min)", "#", :id => "snooze_button", :class => "btn btn-default btn-large" %> <br/> <br/>
+<%= link_to "I'm awake!", "#", :id => "dismiss_button", :class => "btn btn-primary btn-large"%>
+</div>
+
+image_end
+</div>
+
+<div id = "audio_start">
+<%= audio_tag audio_path("sun.mp3"), :autoplay => false, :controls => false, :id => "alarm_audio" %> 
+</div>
+
+<div id = "audio_end"></div>
+
+
+
+

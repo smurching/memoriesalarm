@@ -1,17 +1,23 @@
-<%= form_tag login_path, :class => "centered", :remote => false do %>
+<%= form_tag login_path, :class => "centered", :id => "new_session", :remote => false do %>
   
   <div class="field">
-    <%= label_tag :email %>
     <%= text_field_tag :email %>
   </div>
   <div class="field">
-    <%= label_tag "Password" %>
     <%= password_field_tag :password_hash %>
   </div>
   <div class="actions">
-    <%= submit_tag 'Login', :id => "login_submit", :class => "btn btn-success" %>
+    <%= submit_tag 'Login', :id => "login_btn", :class => "btn btn-success btn-large btn-form" %> 
   </div>
-  
+	
+	<br/>
+	<%= link_to "Register", root_path, :remote => true, :class => "btn"%>  
+	
+	
+	<script>
+  		$('#email').watermark("Email");
+  		$('#password_hash').watermark("Password");
+	</script>
 <% end %>
 
-<%= link_to "Register", new_user_path, :remote => true, :class => "btn"%>
+

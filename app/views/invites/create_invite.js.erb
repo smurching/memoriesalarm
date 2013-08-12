@@ -1,0 +1,4 @@
+<%if @invite_sent %>
+$('#wrapper').append("<h5>Share this link with friends to invite them to <%= @group.name%>: </h5> <%= j request.base_url+show_invite_path(@token.value) %>")
+$('#invite_link').on("click", false);
+<%end%>

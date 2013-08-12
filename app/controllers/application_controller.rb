@@ -17,5 +17,12 @@ class ApplicationController < ActionController::Base
 
     # Make logged_in? available in templates as a helper
     helper_method :logged_in?
-      
+    
+    def login_filter
+      unless logged_in?
+        respond_to do |format|
+          format.html {redirect_to root_path}
+        end
+      end
+    end  
 end

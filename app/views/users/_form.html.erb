@@ -1,7 +1,7 @@
 
 
 
-<%= form_for(@user, :remote => false, :html => {:class => "new_user centered"}) do |f| %>
+<%= form_for(User.new, :remote => true, :html => {:class => "new_user centered"}) do |f| %>
 
 	<div id = "blurb">
 		<h3 class = "centered" id = "welcome">Welcome to MemoryAlarm!</h3>

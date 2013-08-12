@@ -1,0 +1,8 @@
+         <div id = navlinks>
+          	<%if logged_in?%>
+          		<%= link_to "Logout", logout_path%> | 
+          		<%= link_to "Create Group", new_group_path %> | 
+          		<%= link_to "My Groups", groups_path %> | 
+          		<%= link_to "My content", contents_path%>
+          	<%end%>
+          </div>

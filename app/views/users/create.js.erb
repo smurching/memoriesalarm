@@ -1,0 +1,45 @@
+
+
+<%if @password_error%>
+
+if(document.getElementById('password_error') == null){
+	$('#new_user').prepend("<div id = password_error>Make sure your password is at least 6 characters long</div>");	
+}
+
+else{
+	$('#password_error').show();
+}
+
+<%else%>
+	$('#password_error').hide();
+<%end%>
+
+
+<%if @email_error %>
+if(document.getElementById('email_error') == null){
+	$('#new_user').prepend("<div id = email_error>Please enter a valid email</div>");	
+}
+
+else{
+	$('#email_error').show();
+}
+
+<%else%>
+	$('#email_error').hide();
+<%end%>
+
+
+
+<%unless @password_error || @email_error%>
+
+$('#wrapper').html("<%= j render "main/index"%>");
+
+$('#navlinks').html("<%= j render 'main/navlinks'%>");
+
+$('#wrapper').append("<%=j render "loadscripts/alarm" %>");	
+
+$('#wrapper').prepend("<h4>Thanks for signing up!</h4> <br/>");
+	
+<%end%>
+
+

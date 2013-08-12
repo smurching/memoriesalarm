@@ -41,16 +41,30 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new({:email => params[:user][:email], :name => params[:user][:name]})
-    @user.password_hash = User.password_create(params[:user][:password_hash])
+    password_hash = params[:user][:password]
+    
+    if password_hash.length < 6
+      # puts(password_hash.to_s.length.to_s+"-----------------------------------------------------------------------------------------------")
+      @password_error = true
+      respond_to do |format|
+        format.html {return redirect_to root_path, notice: "Make sure your password is at least 6 characters long"}
+        return format.js 
+      end
+    end
+    
+    @user.password_hash = User.password_create(password_hash)
+
     
     respond_to do |format|
-      if params[:user][:password_hash].length >= 6 && @user.save
+      if @user.save
+        session[:user_id] = @user.id
         format.html { redirect_to root_path }
-        format.js
+        format.js  
         format.json { render json: @user, status: :created, location: @user }
       else
-        format.html {redirect_to new_user_path, notice: "Make sure your password is at least 6 characters long" }
-        format.js {redirect_to new_user_path}
+        @email_error = true        
+        format.html {redirect_to root_path, notice: "Please enter a valid email and make sure your password is at least 6 characters long" }
+        format.js 
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

@@ -1,0 +1,25 @@
+
+
+<%if @password_error%>
+if($('#password_error') == []){
+	$('#new_user').prepend("<div id = password_error>Make sure your password is at least 6 characters long</div>");	
+}
+
+else{
+	$('#password_error').show();
+}
+
+<%end%>
+
+<%if @email_error %>
+if($('#email_error') == []){
+	$('#new_user').prepend("<div id = email_error>Please enter a valid email</div>");	
+}
+
+else{
+	$('#email_error').show();
+}
+	
+<%end%>
+
+

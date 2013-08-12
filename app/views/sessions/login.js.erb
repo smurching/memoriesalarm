@@ -1,0 +1,25 @@
+<%if @logged_in%>
+
+$('#wrapper').html("<%= j render "main/index"%>");
+
+
+$('#navlinks').html("<%= j render 'main/navlinks'%>");
+
+
+
+$('#wrapper').append("<%=j render "loadscripts/alarm" %>");	
+
+
+
+
+
+
+<%else%>
+
+if(document.getElementById('login_error') == null){
+	$('#new_session').prepend("<div id = login_error>Your email and password didn't seem to match </div>");	
+}
+
+$('#password_hash').val("");
+
+<%end%>

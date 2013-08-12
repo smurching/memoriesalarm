@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :contents
   validates :email, :format => {:with => /\A[a-zA-Z0-9]+@[a-zA-Z]+[.][a-zA-Z.]+\z/, :message => 'is not valid. Please input a valid email address'}  
   validates :name, :presence => true
+  validates :email, :uniq => true
 
    
    

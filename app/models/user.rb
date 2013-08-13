@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validates :email, :format => {:with => /\A[a-zA-Z0-9]+@[a-zA-Z]+[.][a-zA-Z.]+\z/, :message => 'is not valid. Please input a valid email address'}  
   validates :name, :presence => true
   validates :email, :uniqueness => true
-
+  
    
    
   #BCRYPT STUFF STARTS HERE
@@ -42,6 +42,20 @@ class User < ActiveRecord::Base
   password_hash = @password
  end
  
+ def all_content
+   output = []
+   groups = self.groups
+   groups.each do |group|
+    group.users.each do |user|
+      user.contents.each do |content|
+        unless output.include?(content)
+          output << content
+        end
+      end
+    end     
+   end
+ return all_content
+ end
 
     
 end

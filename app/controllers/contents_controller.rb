@@ -2,7 +2,7 @@ class ContentsController < ApplicationController
   # GET /contents
   # GET /contents.json
   def index
-    @contents = Content.all
+    @contents = current_user.contents
 
     respond_to do |format|
       format.html # index.html.erb

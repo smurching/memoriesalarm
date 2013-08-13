@@ -13,14 +13,14 @@
 
 
   <div class = "field">
-  	<%=f.label :name%>
-  	<%=f.text_field :name%>
+  	<%=f.text_field :name%> <br/> <br/>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Group", :class => "btn btn-default", :id => "create_group_button" %>
   </div>
+  
+<script>
+	$('#group_name').watermark("Name");
+</script>
 <% end %>
 
-<form action="http://johnsmith.s3.amazonaws.com/" method="post"
-
-enctype="multipart/form-data">

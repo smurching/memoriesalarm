@@ -14,7 +14,4 @@
 //= require jquery_ujs
 //= require bootstrap-dropdown
 //= require watermark
-//= require jquery.jplayer.inspector
-//= require jquery.jplayer.min
-//= require popcorn.jplayer
 //= require_tree .

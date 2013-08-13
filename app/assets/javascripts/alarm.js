@@ -227,10 +227,19 @@ function alarm_alert(){
 		$('#wrapper').hide();
 		$('#alarm_response_container').remove()
 		$('body').append("<div id = 'alarm_response_container'>"+img+audio+"</div>");
+		
+		if($(window).width() > 700){
+			$('#snooze_button, #dismiss_button').css({"font-size" : "28px", "height" : "50px"});
+		}
+		else{
+			$('#snooze_button, #dismiss_button').css({"font-size" : "14px", "height" : "25px"});
+		}	
 
 		alarm = document.getElementById("alarm_audio");
 		alarm.loop = true;
 		alarm.play();
+		
+
 		
 		// $('#wrapper').append(data.length);
 		// $('#wrapper').append(audio_start);
@@ -275,7 +284,6 @@ function alarm_alert(){
 		var o = $('#content_image').offset();
 		$('#alarm_responses').offset({"top" : o.top+(img_height-btns_height)/2});		
 	});
-	
 
 
 	

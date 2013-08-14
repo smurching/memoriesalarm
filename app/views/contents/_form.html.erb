@@ -10,9 +10,9 @@
     			<i class="icon-file fileupload-exists"></i> 
     			<span class="fileupload-preview"></span>
     		</div>
-    		<span class="btn btn-file"><span class="fileupload-new">Select file</span>
-    		<span class="fileupload-exists">Change</span><%= f.file_field :content_file%>
-    		</span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+    		<span class="btn btn-file"><span class="fileupload-new" id = "select_file">Select file</span>
+    		<span class="fileupload-exists" id = "change_file">Change</span><%= f.file_field :content_file%>
+    		</span><a href="#" class="btn fileupload-exists" id = "remove_file" data-dismiss="fileupload">Remove</a>
   		</div>
   		
   	<%if false%>

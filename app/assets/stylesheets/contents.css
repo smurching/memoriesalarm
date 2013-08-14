@@ -7,3 +7,18 @@
 	width: 485px;
 	max-width: 100%;
 }
+
+
+#contents_table{
+	width: 20%;
+	margin-left: 40%;
+}
+
+#contents_table_container{
+	text-align: center;
+}
+
+#contents_header_row > *{
+	text-align:center;
+}
+

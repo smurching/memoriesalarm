@@ -51,7 +51,7 @@ class InvitesController < ApplicationController
       current_user.save      
  
       respond_to do |format|
-        format.html {redirect_to root_path, notice: "You joined "+group.name}
+        format.html {redirect_to groups_path}
       end
       
     else

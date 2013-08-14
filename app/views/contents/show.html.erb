@@ -39,5 +39,6 @@
 </script>
 <%end%>
 
+<%if current_user.id == @content.user_id%>
 <%= link_to 'Delete', content_path(@content.id), :method => :delete, :data => {:confirm => "Are you sure?"} %> 
-
+<%end%>

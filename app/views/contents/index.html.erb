@@ -1,11 +1,7 @@
 <h3>Content you've uploaded: </h3>
 
 
-<% @contents.each do |content| %>
-
-	<%= link_to content.title, content %> | <%= link_to 'Delete', content, method: :delete, data: { confirm: 'Are you sure?' } %> <br/>
-  
-<% end %>
+<%= render "table"%>
 
 
 

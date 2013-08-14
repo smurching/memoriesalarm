@@ -5,10 +5,12 @@ class User < ActiveRecord::Base
   attr_accessible :name, :password_hash_confirmation, :group_id, :password_hash, :email
   has_and_belongs_to_many :groups, :uniq => true   
   has_many :contents
-  validates :email, :format => {:with => /\A[a-zA-Z0-9.-_]+@[a-zA-Z]+[.][a-zA-Z.]+\z/, :message => 'is not valid. Please input a valid email address'}  
+  has_many :users, :through => :groups, :uniq => true
+  
+  validates :email, :format => {:with => /\A[-a-zA-Z0-9._]+@[a-zA-Z]+[.][a-zA-Z.]+\z/, :message => 'is not valid. Please input a valid email address'}  
   validates :name, :presence => true
   validates :email, :uniqueness => true
-  
+
    
    
   #BCRYPT STUFF STARTS HERE
@@ -43,18 +45,17 @@ class User < ActiveRecord::Base
  end
  
  def all_content
-   output = []
-   groups = self.groups
-   groups.each do |group|
-    group.users.each do |user|
-      user.contents.each do |content|
-        unless output.include?(content)
-          output << content
-        end
+   output = self.contents
+   self.users.each do |user|
+    user.contents.each do |content|
+      unless output.include?(content)
+        output << content
       end
-    end     
-   end
- return all_content
+    end
+   
+   end     
+   
+ return output
  end
 
     

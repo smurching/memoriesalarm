@@ -4,3 +4,17 @@
 */
 
 
+
+#users_table{
+	width: 20%;
+	margin-left: 40%;
+}
+
+#users_table_container{
+	text-align: center;
+}
+
+#users_header_row > *{
+	text-align:center;
+}
+

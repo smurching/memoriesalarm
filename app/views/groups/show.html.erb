@@ -1,22 +1,19 @@
 <h3 id = "group_name" class = "centered"><%=@group.name%></h3> <br/>
 
-<h4 id = "group_members_heading" class = "centered">Members</h4>
 
-<% @members.each do |user|%>
-	<p>- <%= user.name %></p> <br/>	
-<%end%>
+<ul class="nav nav-tabs">
+  <li class = "active"><a href="#group_members_pane" data-toggle="tab">Members</a></li>
+  <li><a href="#group_content_pane" data-toggle="tab">Content</a></li>
 
-<h4 id = "group_content_heading" class = "centered">Content</h4>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="group_members_pane"> <%= render "users/table" %></div>
+  <div class="tab-pane" id="group_content_pane"> <%= render "contents/table"%></div>
+
+</div>
 
 
-<%if @contents != []%>
-	<% @contents.each do |content|%>
-		<p>- <%= link_to content.title, content %></p> <br/>	
-	<%end%>
-	
-<%else%>
-	<p> No content has been posted yet. <%= link_to "You can change that!", root_path%> </p>
-<%end%>
 
 <br/>
 <%= link_to "Invite friends", create_invite_path(@group.id), :id => "invite_link", :remote => true%>

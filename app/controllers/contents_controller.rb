@@ -33,7 +33,7 @@ class ContentsController < ApplicationController
   end
   
   def random_content
-    @contents = current_user.contents
+    @contents = current_user.all_content
     @content = @contents[rand(@contents.length)]
     respond_to do |format|
       format.html
@@ -55,7 +55,7 @@ class ContentsController < ApplicationController
       if @content.save
         @content.user = current_user
         current_user.contents << @content        
-        format.html { redirect_to @content, notice: 'Content was successfully created.' }
+        format.html { redirect_to @content}
         format.json { render json: @content, status: :created, location: @content }
       else
         format.html { redirect_to root_path, notice: "Content could not be saved" }

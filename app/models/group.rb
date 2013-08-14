@@ -5,4 +5,18 @@ class Group < ActiveRecord::Base
   has_many :contents
   validates :name, :presence => true
   
+ def all_content
+   output = self.contents
+   self.users.each do |user|
+    user.contents.each do |content|
+      unless output.include?(content)
+        output << content
+      end
+    end
+   
+   end     
+   
+ return output
+ end
+  
 end

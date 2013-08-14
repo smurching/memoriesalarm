@@ -1,9 +1,14 @@
+<%if @groups != []%>
 <h3 class = "centered">Your Groups</h3>
 
-<%= div_for(@groups) do |group| %>
+	<%= div_for(@groups) do |group| %>
 
-	- <%= link_to group.name, group_path(group.id) %>
+		<p><%= link_to group.name, group_path(group.id) %></p>
 	
-	<br/><br/>
+	
 
+	<%end%>
+	
+<%else%>
+	You don't seem to be in any groups. <%= link_to "Create one!", new_group_path %>
 <%end%>

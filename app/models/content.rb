@@ -7,8 +7,27 @@ class Content < ActiveRecord::Base
   
   # validates :title, :presence => :true
   
-  def content_file_url
+  def content_file_url(style=:original)
     original = content_file.url
-    return original.split("s3").insert(1, "s3-us-west-2").join
+    styles_hash = {:thumb => "thumb", :medium => "medium", :original => "original"}
+    
+    # modify so that domain name of file src attribute is correct
+    modified = original.split("s3").insert(1, "s3-us-west-2").join
+    
+    # modify so that file is sized properly
+    final = modified.split("original").insert(1, styles_hash[style]).join   
+    
+    if content_file_content_type["image"] != nil
+      return final
+    else
+      return modified
+    end
+
+    
   end
+  
+  def owner
+    return User.find(user_id)
+  end
+  
 end

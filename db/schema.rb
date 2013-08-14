@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130811070311) do
+ActiveRecord::Schema.define(:version => 20130814065526) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20130811070311) do
     t.string   "password_hash"
     t.string   "email"
     t.integer  "group_id"
+    t.integer  "user_id"
   end
 
 end

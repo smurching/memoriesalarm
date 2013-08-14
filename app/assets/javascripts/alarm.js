@@ -155,6 +155,9 @@ $(function(){
 					hour+=12;
 					hour%=24;
 				}
+				else if(hour == 12){
+					hour = 0
+				}
 			
 				var date = new Date();
 				var hour_now = date.getHours();

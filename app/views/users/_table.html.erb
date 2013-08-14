@@ -1,0 +1,36 @@
+<%if @users != []%>
+
+<%if @in_group == true %>
+
+<h4 id = "users_table_heading" class = "centered">Members</h4>
+
+<%else%>
+
+<h4 id = "users_table_heading" class = "centered">Users</h4>
+
+<%end%>
+
+
+
+<table class = "table table-hover" id = "users_table">
+  <%if false%>
+  <tr id = "users_header_row">
+    <th>Name</th>
+
+  </tr>
+  <%end%>
+
+<% @users.each do |user| %>
+
+  <tr>
+
+	<td><%= user.name%></td>
+
+  </tr>
+<% end %>
+</table>
+
+
+
+
+<%end%>

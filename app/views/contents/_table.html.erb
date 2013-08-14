@@ -1,0 +1,36 @@
+<%if @contents != []%>
+
+<h4 id = "contents_table_heading" class = "centered">Content</h4>
+
+
+
+
+
+<table class = "table table-hover" id = "contents_table">
+  <tr id = "contents_header_row">
+    <th>Title</th>
+    <th>Posted By</th>
+    <th>Thumb</th>
+  </tr>
+
+<% @contents.each do |content| %>
+  <%if content.user_id == current_user.id%>
+  	  <tr class = "warning">	
+  <%else%>
+	  <tr>
+  <%end%>
+
+	<td><%= link_to content.title=="" ? "Content "+content.id.to_s : content.title, content_path(content.id) %></td>
+	<td><%= content.owner.name %></td>
+	<td><%= link_to image_tag(content.content_file_url(:thumb)), content_path(content.id), :class => "thumb" %></td>
+  </tr>
+<% end %>
+</table>
+
+	
+	
+<%else%>
+	<p> No content has been posted yet. <%= link_to "You can change that!", root_path%> </p>
+<%end%>
+
+

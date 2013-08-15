@@ -151,9 +151,12 @@ $(function(){
 				var hour = parseInt($('#hour').val());
 				var min = parseInt($('#min').val());
 			
+				// if the time is PM, add 12 to the hour to get a 24-hour time value
+				// don't do this if it's 12 PM
 				if($('#time_button').text()=="PM"){
-					hour+=12;
-					hour%=24;
+					if(hour != 12){
+						hour+=12;						
+					}
 				}
 				else if(hour == 12){
 					hour = 0
@@ -172,9 +175,14 @@ $(function(){
 			
 	
 			
-
+				// load alarm alert
 				window.setTimeout(alarm_alert, delay);
-			
+				
+				// 500 ms later, resize window to trigger element positioning
+				window.setTimeout(function(){
+					$(window).resize();
+					
+				}, delay+500);
 			
 			
 			
@@ -228,6 +236,8 @@ function alarm_alert(){
 		var audio = data.slice(audio_start, audio_end);
 		
 		$('#wrapper').hide();
+		$('#navbar_container').hide();
+		
 		$('#alarm_response_container').remove()
 		$('body').append("<div id = 'alarm_response_container'>"+img+audio+"</div>");
 		
@@ -274,7 +284,7 @@ function alarm_alert(){
 	}, 500);
 	
 	
-	$(window).resize(function(){
+	$(window).off("resize").resize(function(){
 		if($(window).width() > 700){
 			$('#snooze_button, #dismiss_button').css({"font-size" : "28px", "height" : "50px"});
 		}
@@ -284,10 +294,24 @@ function alarm_alert(){
 		
 		var btns_height = $('#alarm_responses').outerHeight();
 		var img_height = $('#content_image').height();
+		var img_width = $('#content_image').width();
+		
+		if(img_height > img_width){
+			$('#content_image').css("height", "100%");
+		}
+		else{
+			$('#content_image').css("width", "100%");
+		}
+		
+		$('#alarm_responses').css("width", $('#content_image').width());
+		
+		
 		var o = $('#content_image').offset();
-		$('#alarm_responses').offset({"top" : o.top+(img_height-btns_height)/2});		
+		$('#alarm_responses').offset({"top" : o.top+(img_height-btns_height)/2, "left" : o.left});		
+		
+		
 	});
-
+	
 
 	
 }

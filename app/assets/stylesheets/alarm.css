@@ -37,18 +37,23 @@
 }
 
 #content_image{
-	height: 50%;
-	width: 50%;
-	max-width: 400px;
+
+	
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 #alarm_responses{
-	background-color: rgba(51, 51, 51, 0.9);
+	background-color: rgba(51, 51, 51, 0.45);
 	padding-top: 2%;
 	padding-bottom: 2%;
 	text-align: center;
+	height:10%;
+}
+
+#alarm_response_container{
+	height:100%;
+	background-color: black;
 }
 

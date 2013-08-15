@@ -214,6 +214,29 @@ $(function(){
 
 
 function snooze(duration){
+	
+	$('#alarm_response_container').remove();
+	$('#wrapper, #navbar_container').show();
+	alarm.pause();
+		
+	var min_val = parseInt($('#min').val());
+	var hour_val = parseInt($('#hour').val());
+	min_val+=5
+		
+	if(min_val >= 60){
+		min_val%=60;
+		min_val = "0"+min_val.toString();
+		hour_val+=1;
+		if(hour_val > 13){
+			hour_val = 1;
+			$('#time_button').click()
+		}
+	}
+		
+	$('#min').val(min_val);
+	$('#hour').val(hour_val);
+	$('#set_alarm_link').click();	
+	
 	window.clearTimeout;
 	alarm = document.getElementById("alarm_audio");
 	alarm.pause();
@@ -272,12 +295,14 @@ function alarm_alert(){
 	$('#alarm_responses').offset({"top" : o.top+(img_height-btns_height)/2});	
 	
 	$('#snooze_button').click(function(){
+
+				
 		snooze(5*60*1000);
 	});
 	
 	$('#dismiss_button').click(function(){
 		$('#alarm_response_container').remove();
-		$('#wrapper').show();
+		$('#wrapper, #navbar_container').show();
 		alarm.pause();
 	});		
 	

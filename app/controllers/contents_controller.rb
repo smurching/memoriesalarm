@@ -34,6 +34,7 @@ class ContentsController < ApplicationController
   
   def random_content
     @contents = current_user.all_content
+    puts("---------------CONTENT LENGTH YO "+@contents.length.to_s+"---------------------")
     @content = @contents[rand(@contents.length)]
     respond_to do |format|
       format.html
@@ -50,15 +51,27 @@ class ContentsController < ApplicationController
   # POST /contents.json
   def create
     @content = Content.new(params[:content])
+    file_size = params[:content][:content_file_file_size]
 
     respond_to do |format|
       if @content.save
+        @content_saved = true
+        
         @content.user = current_user
-        current_user.contents << @content        
+        current_user.contents << @content
+                
         format.html { redirect_to @content}
         format.json { render json: @content, status: :created, location: @content }
       else
-        format.html { redirect_to root_path, notice: "Content could not be saved" }
+        @content_saved = false
+        
+        if file_size == nil
+          @file_nil = true
+        elsif file_size > 1000000
+          @file_too_big = true          
+        end        
+        
+        format.html { redirect_to root_path, notice: "Content could not be saved - please pick a jpg or png file less than 1 MB" }
         format.json { render json: @content.errors, status: :unprocessable_entity }
       end
     end

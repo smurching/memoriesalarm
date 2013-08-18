@@ -34,4 +34,10 @@ class SessionsController < ApplicationController
     end
   end
   
+  def channel
+    respond_to do |format|
+      format.html {render "facebook/channel"}
+    end
+  end
+  
 end

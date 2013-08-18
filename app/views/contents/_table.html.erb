@@ -20,7 +20,7 @@
 	  <tr>
   <%end%>
 
-	<td><%= link_to content.title=="" ? "Content "+content.id.to_s : content.title, content_path(content.id) %></td>
+	<td><%= link_to content.title=="" ? "Content "+content.id.to_s : content.truncated_title, content_path(content.id) %></td>
 	<td><%= content.owner.name %></td>
 	<td><%= link_to image_tag(content.content_file_url(:thumb)), content_path(content.id), :class => "thumb" %></td>
   </tr>

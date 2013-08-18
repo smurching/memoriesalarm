@@ -11,13 +11,18 @@
   </div>
 	
 	<br/>
-	<%= link_to "Register", root_path, :remote => true, :class => "btn"%>  
+	<%= link_to "Register", root_path, :remote => true, :class => "btn"%>  <br/>
+	
+	<%= link_to "Login with Facebook", "#", :id => "facebook_login_link"%>
 	
 	
 	<script>
   		$('#email').watermark("Email");
   		$('#password_hash').watermark("Password");
 	</script>
+	
+	
+	
 <% end %>
 
 

@@ -15,7 +15,7 @@ a:visited{
 }
 
 input.btn-form{
-	width: 220px;
+	width: 216px;
 }
 
 #wrapper{
@@ -40,6 +40,10 @@ input.btn-form{
 
 .field > *, #password_hash{
 	width: 215px;
+}
+
+.notice {
+	text-align: center;
 }
 
 

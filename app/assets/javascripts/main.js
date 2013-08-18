@@ -18,14 +18,16 @@
 
 $(function(){
   
-  $('#form_post_container > input').on("click", function(event){
+  $('#content_submit').on("click", function(event){
     var text = $('span.fileupload-preview').text();
     if(text.match(/jpe?g|png/) == null && text.length != 0){
       event.preventDefault(); 
       $('a.fileupload-exists').click();
       if($('#img_error').length==0){
         $('#file_upload').before("<p class = 'form_error' id = 'img_error'>Make sure your picture is a png, jpg, or jpeg file. Click to Dismiss.<br/></p>");
-        $('#photo_div').errorHighlight();               
+        $('#img_error').click(function(){
+        	$('#img_error').hide();
+        });
       }
       else{
         $('#img_error').show();

@@ -7,6 +7,12 @@
 
 <br/>
 <div id = "alarm_responses">
+	
+<%if @content.title != "" %>
+	<h1 id="content_title_alarm" class="label label-success"><%= @content.truncated_title %></h1>
+<%end%>	
+
+
 <%= link_to "Zzz... (5 min)", "#", :id => "snooze_button", :class => "btn btn-default btn-large" %> <br/> <br/>
 <%= link_to "I'm awake!", "#", :id => "dismiss_button", :class => "btn btn-primary btn-large"%>
 </div>
@@ -15,7 +21,9 @@ image_end
 </div>
 
 <div id = "audio_start">
-<%= audio_tag "https://s3-us-west-2.amazonaws.com/memoriesalarm/sun.mp3", :autoplay => false, :controls => false, :id => "alarm_audio" %> 
+
+<%= audio_tag "https://s3-us-west-2.amazonaws.com/memoriesalarm/sun.mp3", :autoplay => false, :controls => false, :id => "alarm_audio" %>
+
 </div>
 
 <div id = "audio_end"></div>

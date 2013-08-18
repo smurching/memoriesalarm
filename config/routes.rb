@@ -32,6 +32,8 @@ Birthdayalarm::Application.routes.draw do
   #List members of a group
   match '/group/:id/list' => "groups#list_members", as: "list_members"
   
+  match '/channel' => "sessions#channel", as: "channel"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

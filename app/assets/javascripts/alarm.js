@@ -5,6 +5,7 @@
 */			
 
 $(function(){
+
 	var clicked = false;
 	$('#set_alarm_link, #alarm_time').one("click", (function(){
 		if(clicked == false){
@@ -176,13 +177,15 @@ $(function(){
 	
 			
 				// load alarm alert
-				window.setTimeout(alarm_alert, delay);
+				alarm_timeout = window.setTimeout(alarm_alert, delay);
+
+				// Every 50 ms up to 5 seconds, resize the window
 				
-				// 500 ms later, resize window to trigger element positioning
-				window.setTimeout(function(){
-					$(window).resize();
+				// window.setTimeout(function(){
+			
 					
-				}, delay+500);
+					
+				// }, delay+1000);
 			
 			
 			
@@ -193,7 +196,11 @@ $(function(){
 				$('#set_alarm_link').text("Set Alarm");					
 				times_clicked = 1;
 				$('#hour, #min, #time_button').removeAttr("disabled");
-				window.clearTimeout;
+				
+				if(typeof(alarm_timeout)!="undefined"){
+					window.clearTimeout(alarm_timeout);					
+				}
+
 				
 			}	
 			
@@ -211,13 +218,27 @@ $(function(){
 	
 });
 
-
+function periodic_resize(duration, period){
+	var loop_threshold = Math.ceil(duration/period);
+	var num_of_loops = 0;
+	var interval = setInterval(function(){
+		num_of_loops+=1;
+		//console.log(num_of_loops);
+		$(window).resize();
+		if(num_of_loops >= loop_threshold){
+			clearInterval(interval);
+		}
+	}, period);	
+}
 
 function snooze(duration){
 	
 	$('#alarm_response_container').remove();
 	$('#wrapper, #navbar_container').show();
 	alarm.pause();
+	if(typeof(alarm_timeout)!="undefined"){
+		window.clearTimeout(alarm_timeout);					
+	}	
 		
 	var min_val = parseInt($('#min').val());
 	var hour_val = parseInt($('#hour').val());
@@ -275,6 +296,8 @@ function alarm_alert(){
 		alarm.loop = true;
 		alarm.play();
 		
+		periodic_resize(5000, 50);
+		
 
 		
 		// $('#wrapper').append(data.length);
@@ -294,9 +317,7 @@ function alarm_alert(){
 	var o = $('#content_image').offset();
 	$('#alarm_responses').offset({"top" : o.top+(img_height-btns_height)/2});	
 	
-	$('#snooze_button').click(function(){
-
-				
+	$('#snooze_button').click(function(){	
 		snooze(5*60*1000);
 	});
 	
@@ -304,27 +325,38 @@ function alarm_alert(){
 		$('#alarm_response_container').remove();
 		$('#wrapper, #navbar_container').show();
 		alarm.pause();
+		if(typeof(alarm_timeout)!="undefined"){
+					window.clearTimeout(alarm_timeout);					
+		}		
+		
 	});		
 	
 	}, 500);
 	
 	
-	$(window).off("resize").resize(function(){
+	$(window).off("resize").on("resize", function(){
+		// console.log("scrolling or resizing");
 		if($(window).width() > 700){
 			$('#snooze_button, #dismiss_button').css({"font-size" : "28px", "height" : "50px"});
+			$('#content_title_alarm').css("font-size", "18px");
 		}
 		else{
 			$('#snooze_button, #dismiss_button').css({"font-size" : "14px", "height" : "25px"});
+			$('#content_title_alarm').css("font-size", "12px");			
 		}
 		
 		var btns_height = $('#alarm_responses').outerHeight();
 		var img_height = $('#content_image').height();
 		var img_width = $('#content_image').width();
+		var window_height = $(window).height();
+		var window_width = $(window).width();
 		
 		if(img_height > img_width){
+			console.log("height bigger");
 			$('#content_image').css("height", "100%");
 		}
 		else{
+			console.log("width bigger");
 			$('#content_image').css("width", "100%");
 		}
 		
@@ -333,6 +365,9 @@ function alarm_alert(){
 		
 		var o = $('#content_image').offset();
 		$('#alarm_responses').offset({"top" : o.top+(img_height-btns_height)/2, "left" : o.left});		
+		
+		// var window_offset = $(window).scrollTop();
+		// $('#alarm_responses').offset({"top" : window_offset+(window_height-btns_height)/2, "left" : 0});		
 		
 		
 	});

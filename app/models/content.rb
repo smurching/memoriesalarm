@@ -1,6 +1,7 @@
 class Content < ActiveRecord::Base
   attr_accessible :group_id, :user_id, :content_file, :title
   has_attached_file :content_file, :styles => { :medium => "300x300>", :thumb => "100x100>" }#, :s3_credentials => "public/aws3.yml", :bucket => "alarm", :url => ":memoriesalarm.s3.amazonaws.com"   
+  validates_attachment :content_file, :size => { :in => 0..1000.kilobytes}, :message => "Make sure you've uploaded a file (png/jpg up to 1 MB)", :presence => true
   
   belongs_to :user
   belongs_to :group
@@ -23,6 +24,33 @@ class Content < ActiveRecord::Base
       return modified
     end
 
+    
+  end
+  
+  def truncated_title
+    if title != nil && title.length > 40
+      title = title.slice(0, 40)+"..."
+    end
+    return title
+  end
+  
+  def pretty_title(split=30)
+    output = ""
+    num_of_splits = (title.length/split).floor
+    
+    if num_of_splits != 0
+      (1..num_of_splits).each do |i|
+          output += title.slice(split*(i-1), split*(i))+"...\n"    
+      end
+      
+      output += title.slice( split*(num_of_splits), title.length+1)
+    
+    
+    else
+      output = title
+    end
+    
+    return output
     
   end
   

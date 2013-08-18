@@ -2,7 +2,7 @@
 
 <p>
   <b>Title:</b>
-  <%= @content.title %>
+  <%= simple_format(@content.pretty_title) %>
 </p>
 
 <%unless @content.group == nil%>
@@ -21,7 +21,7 @@
 <p>
   Content:</br>
 	<%if /image/.match(@content.content_file_content_type) %>
-		<%= image_tag @content.content_file_url,  :class => "content_image", :id => "content_image"%>
+		<%= image_tag @content.content_file_url(:medium),  :class => "content_image", :id => "content_image"%>
 	<%elsif /text/.match(@content.content_file_content_type)%>
 		<%= @content.content_file %>
 	<%end%>

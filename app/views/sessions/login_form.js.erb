@@ -27,3 +27,24 @@ $(window).resize();
 <%end%>
 
 $('#new_session').prepend("<br/><h4 class = 'centered'> Good to see you again! </h4>");
+
+
+$('#facebook_login_link').click(function(){
+	
+ FB.login(function(response) {
+   if (response.authResponse) {
+     console.log('Welcome!  Fetching your information.... ');
+     
+     var auth_token = response.authResponse.accessToken;
+     
+     FB.api('/me', function(response) {
+       console.log('Good to see you, ' + response.name + '.');
+     });
+     $.get("")
+     
+   } else {
+     console.log('User cancelled login or did not fully authorize.');
+   }
+ });
+ 	
+});
